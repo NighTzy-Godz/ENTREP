@@ -1,0 +1,215 @@
+<% layout('base/base') %> <%- include('../partials/navbar') %> <%-
+include('../partials/flash') %>
+
+<style>
+  .checkout {
+    padding: 70px 0px;
+    /* width: 70%;
+    margin: auto; */
+  }
+
+  .checkHead {
+    background-color: #ecb807;
+    margin-bottom: 50px;
+    width: 100%;
+  }
+  .checkHead a {
+    margin-left: 20px;
+    margin-right: 60px;
+    text-decoration: underline;
+    color: var(--bs-success);
+    width: 100%;
+  }
+  .checkHead h2 {
+    text-align: center;
+  }
+
+  .gcash {
+    display: none;
+  }
+
+  .gcash.show {
+    display: block;
+  }
+
+  .cc {
+    display: none;
+  }
+
+  .cc.show {
+    display: block;
+  }
+</style>
+
+<div class="checkout">
+  <div class="container">
+    <div class="card" style="width: 100%">
+      <div class="checkHead">
+        <h2 class="card-header" id="checkHead">CHECKOUT PAGE</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6 mb-5">
+            <% for(let img of product.img){ %>
+            <img src="<%= img.url %> " alt="" class="img-fluid" />
+            <% } %>
+          </div>
+          <div class="col-md-6">
+            <h3 class="card-title mb-3"><%= product.productName %></h3>
+            <p class="card-text"><%= product.desc %></p>
+            <h6 class="card-text">P<%= product.price %></h6>
+
+            <form
+              action="/product/<%= product._id %>/checkout/buy"
+              method="post"
+              class="mt-5 mb-4"
+            >
+              <select
+                class="form-select mb-4"
+                aria-label="Default select example"
+                id="method"
+              >
+                <option selected>Payment Method</option>
+                <option value="gcash" id="gcash">G-Cash</option>
+                <option value="creditCard" id="cc">Credit Card</option>
+              </select>
+
+              <div class="mb-4 gcash">
+                <label for="validationCustom01" class="form-label"
+                  >G-Cash Number</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="validationCustom01"
+                  placeholder="0000 000 0000"
+                  name="gcash"
+                  required
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="cc">
+                <div class="d-flex">
+                  <div class="mb-4">
+                    <label for="validationCustom01" class="form-label"
+                      >Name</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="validationCustom01"
+                      placeholder="Credit Card Holder"
+                      name="name"
+                      required
+                      style="margin-right: 40px; width: 90% !important"
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="validationCustom01" class="form-label"
+                      >Card Number</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="validationCustom01"
+                      placeholder="0000 0000 0000 0000"
+                      name="cardNumber"
+                      required
+                      style="margin-right: 40px; width: 90% !important"
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="cc">
+                <div class="d-flex">
+                  <div class="mb-4">
+                    <label for="validationCustom01" class="form-label"
+                      >CVV</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="validationCustom01"
+                      placeholder="000"
+                      name="cvv"
+                      required
+                      style="margin-right: 40px; width: 90% !important"
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+
+                  <div class="mb-4">
+                    <label for="validationCustom01" class="form-label"
+                      >Expiry Date</label
+                    >
+                    <input
+                      type="number"
+                      class="form-control"
+                      id="validationCustom01"
+                      placeholder="0000"
+                      name="expire"
+                      required
+                      style="margin-right: 40px; width: 90% !important"
+                    />
+                    <div class="valid-feedback">Looks good!</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="email" class="form-label">Send to Your Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  placeholder="Your Email"
+                  name="age"
+                  required
+                  value="<%= user.email %> "
+                />
+                <%= console.log(user) %>
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <button class="btn btn-success">Buy Out</button>
+            </form>
+            <a href="/product/<%= product._id %>">Go Back</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
+
+<script>
+  const payMethod = document.querySelector("#method");
+
+  const showGCash = document.querySelector(".gcash");
+
+  const showCreditCard = document.querySelectorAll(".cc");
+
+  payMethod.addEventListener("change", function () {
+    if (this.value === "gcash") {
+      showGCash.style.display = "block";
+      for (let items of showCreditCard) {
+        items.style.display = "none";
+      }
+    }
+
+    if (this.value === "creditCard") {
+      for (let items of showCreditCard) {
+        items.style.display = "block";
+      }
+
+      showGCash.style.display = "none";
+    }
+
+    console.log(this.value);
+  });
+</script>

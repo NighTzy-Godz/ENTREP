@@ -1,0 +1,150 @@
+<% layout('base/base') %> <%- include('../partials/navbar') %><%-
+include('../partials/flash') %>
+
+<link rel="stylesheet" href="/css/star.css" />
+<style>
+  .myCardImg {
+    height: auto;
+    width: 100%;
+  }
+</style>
+
+<div class="prodDetail" style="padding-top: 60px">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-5" style="width: 100%">
+          <div
+            id="carouselExampleControls"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner">
+              <% product.img.forEach((img, i) => { %>
+              <div class="carousel-item <%= i === 0 ? 'active': '' %>">
+                <img src="<%= img.url %> " class="myCardImg" alt="..." />
+              </div>
+              <% }) %>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControls"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3 class="card-title mb-2"><%= product.productName %></h3>
+              <h5 class="card-text mb-4 mt-3">&#8369;<%= product.price %></h5>
+            </div>
+
+            <p class="card-text mb-4"><%= product.desc %></p>
+
+            <div class="d-flex mb-4">
+              <% if (currUser && product.owner.equals(currUser._id)) { %>
+              <a
+                href="/product/<%= product._id %>/edit"
+                class="btn btn-success"
+                style="width: 25%; margin-right: 8px"
+                >Edit</a
+              >
+              <form
+                action="/product/<%= product._id %>?_method=DELETE"
+                method="POST"
+                style="width: 40%"
+              >
+                <button
+                  class="btn btn-danger"
+                  style="width: 60%; margin-right: 8px"
+                >
+                  Delete
+                </button>
+              </form>
+              <% } %><% if (currUser && !product.owner.equals(currUser._id)) {%>
+
+              <div
+                class="mb-3 d-flex justify-content-start"
+                style="width: 100%"
+              >
+                <a
+                  href="/product/<%= product._id %>/checkout"
+                  role="button"
+                  class="btn btn-dark"
+                  style="margin-right: 15px; width: 40%"
+                  >Checkout</a
+                >
+                <a
+                  href="/chat/<%= product.owner._id %>"
+                  role="button"
+                  class="btn btn-warning"
+                  style="margin-right: 15px; width: 40%"
+                  >Chat Them
+                </a>
+              </div>
+              <% } %>
+            </div>
+
+            <div class="d-flex justify-content-between card-footer mb-3">
+              <div class="text-muted mt-3">
+                Posted By <%= product.owner.username %>
+              </div>
+              <a href="/product" class="mt-2 nav-link" style="color: #dc3545"
+                >Go Back</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <% if(product.review.length === 0){ %>
+        <h3 class="text-center">THERE ARE NO CURRENT REVIEW FOR NOW</h3>
+        <% } %> <% for(let items of product.review){ %>
+        <div class="card mt-4 mb-4">
+          <div class="card-body">
+            <h6 class="card-title text-muted">
+              Reviewed By <%= items.owner.username %>
+            </h6>
+            <p
+              class="starability-result mt-3"
+              data-rating="<%= items.rating %>"
+            >
+              Rated: 3 stars
+            </p>
+            <p><%= items.body%></p>
+            <% if(currUser && items.owner.equals(currUser._id)){ %>
+            <form
+              action="/product/<%= product._id %>/reviews/<%= items._id %>?_method=DELETE"
+              method="POST"
+            >
+              <button class="btn btn-danger" style="width: 25%">Delete</button>
+            </form>
+            <% } %>
+          </div>
+        </div>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,78 @@
+<% layout('base/base') %> <%- include('../partials/navbar') %> <%-
+include('../partials/flash') %>
+
+<div class="purchase" style="padding: 60px 0px">
+  <div class="container">
+    <% if (user.productsBought.length === 0) { %>
+    <div class="row">
+      <div class="col-md-12 text-center mb-5">
+        <h1>THERE ARE NO PURCHASE THAT YOU MADE FOR NOW</h1>
+      </div>
+    </div>
+    <% } else{ %>
+    <div class="row">
+      <div class="col-md-12 text-center mb-5">
+        <h1>Your Purchase</h1>
+      </div>
+    </div>
+    <% } %>
+
+    <div class="row">
+      <% for(let items of user.productsBought){ %>
+      <div class="col-md-12 offset-1">
+        <div class="card mb-5" style="max-width: 80%">
+          <div class="row g-0">
+            <% for(let img of items.img){ %>
+            <div class="col-md-4">
+              <img
+                src="<%= img.url %> "
+                class="img-fluid rounded-start"
+                alt="..."
+              />
+            </div>
+            <% } %>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h5 class="card-title"><%= items.productName %></h5>
+                  <p class="text-muted"><%= items.owner.username %></p>
+                </div>
+
+                <p class="card-text"><%= items.desc %></p>
+                <h4 class="d-flex justify-content-end mt-5">
+                  Order Total: &#8369; <%= items.price %>
+                </h4>
+              </div>
+              <div
+                class="card-footer d-flex justify-content-end"
+                style="width: 100%"
+              >
+                <a
+                  href="/product/<%= items._id %>/reviews"
+                  class="btn btn-warning"
+                  style="width: 28%; margin-right: 8px"
+                  >Rate</a
+                >
+                <a
+                  href="/product/<%= items._id %>"
+                  class="btn btn-primary"
+                  style="width: 28%; margin-right: 8px"
+                  >Buy Again</a
+                >
+                <a
+                  href="/chat/<%= items.owner._id %>"
+                  class="btn btn-primary"
+                  style="width: 28%"
+                  >Message</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,140 @@
+<% layout('base/base') %> <%- include('../partials/navbar') %><%-
+include('../partials/flash') %>
+
+<style>
+  .profile {
+    padding: 70px 0px;
+  }
+
+  .profileContainer {
+    width: 60%;
+    margin: auto;
+  }
+
+  .leftCard {
+    background-color: #1d809f;
+    height: 40vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .leftCard h3 {
+    color: white;
+    text-transform: capitalize;
+  }
+
+  .leftCard p {
+    text-align: center;
+  }
+  .rightCard {
+    padding-top: 20px;
+    border: 1px solid rgb(162, 146, 146);
+    background-color: #121212;
+    position: relative;
+  }
+
+  .rightContainer {
+    width: 90%;
+    margin: auto;
+  }
+  /* #1d809f */
+  .rightCard #title {
+    margin-bottom: 20px;
+    color: #ecb807;
+  }
+
+  .rightCard .info h5 {
+    color: #1d809f;
+  }
+  .rightCard .info p {
+    color: rgba(255, 255, 255, 0.823);
+  }
+
+  .profileBot {
+    position: absolute;
+    bottom: 13px;
+  }
+
+  .profileBot h5 {
+    color: white;
+  }
+
+  .profileBot span {
+    color: #1d809f;
+  }
+</style>
+
+<div class="profile">
+  <div class="profileContainer">
+    <div class="mainCard">
+      <div class="row">
+        <div class="col-md-4 leftCard">
+          <div class="">
+            <h3><%= user.firstName %> <%= user.lastName %></h3>
+            <p><%= user.username %></p>
+          </div>
+        </div>
+        <div class="col-md-8 rightCard">
+          <div class="rightContainer">
+            <h5 id="title">YOUR BASIC INFORMATION</h5>
+
+            <div class="row mb-3 info">
+              <div class="col-md-7">
+                <h5>Username</h5>
+                <p><%= user.username %></p>
+              </div>
+              <div class="col-md-5">
+                <h5>Full Name</h5>
+                <p><%= user.firstName %> <%= user.lastName %></p>
+              </div>
+            </div>
+
+            <div class="row mb-3 info">
+              <div class="col-md-7">
+                <h5>Age</h5>
+                <p><%= user.age %> Years Old</p>
+              </div>
+              <div class="col-md-5">
+                <h5>Email</h5>
+                <p><%= user.email %></p>
+              </div>
+            </div>
+
+            <div class="row mb-3 info">
+              <div class="col-md-7">
+                <h5>Products Created</h5>
+                <p>
+                  <%= user.createdProduct.length %> <%=
+                  user.createdProduct.length > 1 ? 'Products':'Product' %>
+                </p>
+              </div>
+              <div class="col-md-5">
+                <h5>Products Bought</h5>
+                <p><%= user.productsBought.length %> Products</p>
+              </div>
+            </div>
+
+            <div class="row mb-3 info">
+              <div class="col-md-5 mb-5">
+                <h5>Money Spent</h5>
+
+                <p>
+                  &#8369; <%= user.moneySpent === 0 ? '0': user.moneySpent %>
+                </p>
+              </div>
+            </div>
+            <div class="profileBot">
+              <div class="d-flex justify-content-around">
+                <h5><span>Total Earnings:</span> &#8369; 0</h5>
+                <a href=""></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,102 @@
+<% layout('base/base') %> <%- include('../partials/navbar') %> <%-
+include('../partials/flash') %>
+
+<link rel="stylesheet" href="/css/star.css" />
+
+<div class="prodDetail" style="padding-top: 60px">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-5" style="width: 98%">
+          <% product.img.forEach(img=> { %>
+          <img src="<%= img.url %> " class="card-img-top" alt="..." />
+          <% }); %>
+
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <h3 class="card-title mb-2"><%= product.productName %></h3>
+              <h5 class="card-text mb-4 mt-3">P<%= product.price %></h5>
+            </div>
+
+            <p class="card-text mb-4"><%= product.desc %></p>
+
+            <div class="card-footer mb-3">
+              <div class="text-muted mt-3">
+                Posted By <%= product.owner.username %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <form
+          action="/product/<%= product._id %>/reviews"
+          class="needs-validation"
+          method="POST"
+        >
+          <h1>Leave a Review</h1>
+          <fieldset class="starability-checkmark">
+            <input
+              type="radio"
+              id="no-rate"
+              class="input-no-rate"
+              name="review[rating]"
+              value="0"
+              checked
+              aria-label="No rating."
+            />
+            <input
+              type="radio"
+              id="first-rate1"
+              name="review[rating]"
+              value="1"
+            />
+            <label for="first-rate1" title="Terrible">1 star</label>
+            <input
+              type="radio"
+              id="first-rate2"
+              name="review[rating]"
+              value="2"
+            />
+            <label for="first-rate2" title="Not good">2 stars</label>
+            <input
+              type="radio"
+              id="first-rate3"
+              name="review[rating]"
+              value="3"
+            />
+            <label for="first-rate3" title="Average">3 stars</label>
+            <input
+              type="radio"
+              id="first-rate4"
+              name="review[rating]"
+              value="4"
+            />
+            <label for="first-rate4" title="Very good">4 stars</label>
+            <input
+              type="radio"
+              id="first-rate5"
+              name="review[rating]"
+              value="5"
+            />
+            <label for="first-rate5" title="Amazing">5 stars</label>
+          </fieldset>
+          <div class="mb-3">
+            <label class="form-label" for="review">Your Feedback</label>
+            <textarea
+              name="review[body]"
+              class="form-control"
+              id="review"
+              cols="30"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+          <button class="btn btn-success">Submit Feedback</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

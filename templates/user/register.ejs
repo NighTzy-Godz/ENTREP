@@ -1,0 +1,143 @@
+<% layout('base/base') %> <%- include('../partials/navbar') %> <%-
+include('../partials/flash') %>
+
+<div class="register" style="padding: 100px 0px" class="card">
+  <div class="container">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-7">
+          <img src="/img/imgBg2.jpg" alt="" class="img-fluid" />
+        </div>
+        <div class="col-md-5">
+          <form
+            action="/register"
+            method="POST"
+            class="needs-validation mt-2"
+            style="padding: 0px 10px"
+            novalidate
+          >
+            <div class="row">
+              <div class="col-md-12">
+                <h1>REGISTER HERE</h1>
+              </div>
+            </div>
+            <div class="d-flex">
+              <div class="mb-3">
+                <label for="validationCustom01" class="form-label"
+                  >First Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom01"
+                  placeholder="First Name"
+                  name="firstName"
+                  required
+                  style="margin-right: 10px; width: 95%"
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="validationCustom01" class="form-label"
+                  >Last Name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom01"
+                  placeholder="Last Name"
+                  name="lastName"
+                  required
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="mb-3">
+                <label for="validationCustom01" class="form-label"
+                  >Username</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom01"
+                  placeholder="Username"
+                  name="username"
+                  style="margin-right: 10px; width: 95%"
+                  required
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="validationCustom01" class="form-label">Age</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="validationCustom01"
+                  placeholder="Your Age"
+                  name="age"
+                  required
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+            </div>
+
+            <div class="d-flex">
+              <div class="mb-3">
+                <label for="validationCustom01" class="form-label"
+                  >Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="validationCustom01"
+                  placeholder="Password"
+                  name="password"
+                  required
+                  style="margin-right: 10px; width: 95%"
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+              <div class="mb-3">
+                <label for="validationCustom01" class="form-label"
+                  >Confirm Password</label
+                >
+                <input
+                  type="password"
+                  class="form-control"
+                  id="validationCustom01"
+                  placeholder="Confirm Password"
+                  name="password2"
+                  required
+                />
+                <div class="valid-feedback">Looks good!</div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="validationCustom01" class="form-label">Email</label>
+              <input
+                type="text"
+                class="form-control"
+                id="validationCustom01"
+                placeholder="Email"
+                name="email"
+                required
+              />
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+            <button class="btn btn-md btn-success" style="width: 30%">
+              Register
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>

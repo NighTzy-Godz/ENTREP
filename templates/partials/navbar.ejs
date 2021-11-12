@@ -1,0 +1,56 @@
+<!-- Navigation-->
+
+<style>
+  #mainNav {
+    background-color: #ecb807;
+    padding: 15px 0;
+    z-index: 1;
+  }
+
+  #mainNav .navbar-brand {
+    font-family: var(--bs-font-monospace);
+    font-size: 30px;
+    color: black;
+  }
+  .seperate {
+    background-color: #e6b41b !important;
+    padding: 15px;
+  }
+</style>
+
+<nav class="navbar navbar-light sticky-top" id="mainNav">
+  <div class="container">
+    <a class="navbar-brand" href="/">ARTELIER</a>
+  </div>
+</nav>
+
+<a class="menu-toggle rounded" href="#"><i class="fas fa-bars"></i></a>
+<nav id="sidebar-wrapper">
+  <ul class="sidebar-nav">
+    <li class="sidebar-brand" style="color: white">Start Here</li>
+    <li class="seperate">AUTHENTICATE</li>
+    <% if (!currUser) { %>
+    <li class="sidebar-nav-item"><a href="/login">Login</a></li>
+    <li class="sidebar-nav-item"><a href="/register">Register</a></li>
+    <% } %> <% if(currUser){ %>
+
+    <li class="sidebar-nav-item">
+      <a href="/product/create">Create Product</a>
+    </li>
+    <li class="sidebar-nav-item"><a href="/logout">Logout</a></li>
+    <% } %>
+    <li class="seperate">NAVIGATE</li>
+    <li class="sidebar-nav-item"><a href="/#home">Home</a></li>
+    <li class="sidebar-nav-item"><a href="/#about">About</a></li>
+    <li class="sidebar-nav-item"><a href="/#services">Services</a></li>
+
+    <li class="sidebar-nav-item"><a href="/product">Products</a></li>
+    <% if (currUser) { %>
+    <li class="seperate">INFORMATION</li>
+    <li class="sidebar-nav-item">
+      <a href="/purchase">Your Purchase</a>
+    </li>
+    <li class="sidebar-nav-item"><a href="/profile">Profile</a></li>
+    <% } %>
+  </ul>
+</nav>

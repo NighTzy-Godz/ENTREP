@@ -1,0 +1,67 @@
+<% layout('base/base') %> <%- include('../partials/navbar') %> <%-
+include('../partials/flash') %>
+
+<div class="register" style="padding: 100px 0px" class="card">
+  <div class="container">
+    <div class="card">
+      <div class="row">
+        <div class="col-md-8">
+          <img src="/img/imgBg2.jpg" alt="" class="img-fluid" />
+        </div>
+        <div class="col-md-4">
+          <form
+            action="/login"
+            method="POST"
+            style="padding: 0px 10px"
+            class="needs-validation mt-2"
+            novalidate
+          >
+            <div class="row">
+              <div class="col-md-12 mb-4">
+                <h1>LOGIN HERE</h1>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="validationCustom01" class="form-label"
+                >Username</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="validationCustom01"
+                placeholder="Username"
+                name="username"
+                required
+              />
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="validationCustom01" class="form-label"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="validationCustom01"
+                placeholder="Password"
+                name="password"
+                required
+              />
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+
+            <div class="mb-3">
+              <small><a href="/register">Dont Have an Account?</a></small>
+            </div>
+            <button class="btn btn-md btn-success" style="width: 30%">
+              Login
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/footer') %>
